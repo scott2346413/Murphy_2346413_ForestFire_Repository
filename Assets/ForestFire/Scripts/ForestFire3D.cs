@@ -30,6 +30,8 @@ public class ForestFire3D : MonoBehaviour
 
     private Camera gameCamera; // the camera that is players viewport
 
+    public bool setRandomFires;
+
     // Awake is a built-in Unity function that is only called once, before the Start function
     private void Awake()
     {
@@ -129,18 +131,22 @@ public class ForestFire3D : MonoBehaviour
             }
         }
 
-        do
+        if (setRandomFires) // only set fires if bool is set to true
         {
-            xC = UnityEngine.Random.Range(0, gridSizeX);// now pick some trees at random and set them alight
-            yC = UnityEngine.Random.Range(0, gridSizeY);
-
-            if (forestFireCells[xC, yC].cellState == ForestFireCell.State.Tree)
+            do
             {
-                forestFireCells[xC, yC].SetAlight();
+                xC = UnityEngine.Random.Range(0, gridSizeX);// now pick some trees at random and set them alight
+                yC = UnityEngine.Random.Range(0, gridSizeY);
 
-                nlight = nlight - 1;     // decrease number of trees to light by 1
-            }
-        } while (nlight > 0);  // when you've lit them all exit this loop
+                if (forestFireCells[xC, yC].cellState == ForestFireCell.State.Tree)
+                {
+                    forestFireCells[xC, yC].SetAlight();
+
+                    nlight = nlight - 1;     // decrease number of trees to light by 1
+                }
+            } while (nlight > 0);  // when you've lit them all exit this loop
+        }
+        
 
         // set the middle cell as grass which is where the player is placed
         forestFireCells[20, 20].SetGrass();
