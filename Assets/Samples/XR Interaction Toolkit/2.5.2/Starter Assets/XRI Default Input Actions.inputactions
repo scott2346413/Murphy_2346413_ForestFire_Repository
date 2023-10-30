@@ -2600,6 +2600,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Fire Starter",
+            "id": "c135d5c3-f9d8-4493-b9c7-835c5f8ba4ac",
+            "actions": [
+                {
+                    "name": "Start Fire",
+                    "type": "Button",
+                    "id": "b5c3e92a-908b-40dd-b3e7-b80414e545ac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6c8c9191-1809-4264-a3a4-9148ffd3292f",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

@@ -44,7 +44,7 @@ public class ForestFire3D : MonoBehaviour
     {
         CreateGrid(gridSizeX, gridSizeY);
         RandomiseGrid();
-        PauseGame(true);
+        //PauseGame(true);
         UpdateGridVisuals();
     }
 
