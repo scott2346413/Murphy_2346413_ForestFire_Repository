@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class FireStarter : MonoBehaviour
 {
     [SerializeField] float cooldownTime;
     float nextCooldown;
 
-    [SerializeField] ForestFire3D forestFire;
+    [SerializeField] XRRayInteractor interactor;
+
 
     private void Start()
     {
@@ -26,14 +29,21 @@ public class FireStarter : MonoBehaviour
             return;
         }
 
-        Vector2Int cellPosition = getCurrentCell();
-        forestFire.forestFireCells[cellPosition.x, cellPosition.y].SetAlight();
+        ForestFireCell cell = getCurrentCell();
+        Debug.Log(cell.gameObject);
 
     }
 
-    Vector2Int getCurrentCell()
+    ForestFireCell getCurrentCell()
     {
-        Vector2Int cellPosition = new Vector2Int(Mathf.FloorToInt(transform.position.x/4), Mathf.FloorToInt(transform.position.z/4));
-        return cellPosition;
+        RaycastHit hit;
+        interactor.TryGetCurrent3DRaycastHit(out hit);
+
+        if(hit.collider != null)
+        {
+            return hit.collider.GetComponent<ForestFireCell>();
+        }
+
+        return null;
     }
 }
