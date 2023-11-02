@@ -7,7 +7,6 @@ public class SlimeLauncher : MonoBehaviour
 {
     [SerializeField] Transform launchPoint;
     [SerializeField] GameObject slimeball;
-    [SerializeField] GameObject slimeArea;
     [SerializeField] float timeBetweenAttacks;
 
     [SerializeField] float slimeFlyTime;
@@ -33,7 +32,7 @@ public class SlimeLauncher : MonoBehaviour
 
     void throwSlime()
     {
-        GameObject thisSlimeball = Instantiate(slimeball, launchPoint);
+        GameObject thisSlimeball = Instantiate(slimeball, launchPoint.position, Quaternion.identity);
         Rigidbody slimeRigidbody = thisSlimeball.GetComponent<Rigidbody>();
 
         if(slimeRigidbody == null)
