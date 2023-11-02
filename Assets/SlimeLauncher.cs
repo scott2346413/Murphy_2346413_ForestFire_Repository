@@ -6,9 +6,11 @@ using UnityEngine;
 public class SlimeLauncher : MonoBehaviour
 {
     [SerializeField] Transform launchPoint;
-    [SerializeField] GameObject slimeBall;
+    [SerializeField] GameObject slimeball;
     [SerializeField] GameObject slimeArea;
     [SerializeField] float timeBetweenAttacks;
+
+    [SerializeField] float slimeFlyTime;
 
     float nextAttack;
     Transform player;
@@ -31,7 +33,32 @@ public class SlimeLauncher : MonoBehaviour
 
     void throwSlime()
     {
-        Instantiate(slimeBall, launchPoint);
+        GameObject thisSlimeball = Instantiate(slimeball, launchPoint);
+        Rigidbody slimeRigidbody = thisSlimeball.GetComponent<Rigidbody>();
 
+        if(slimeRigidbody == null)
+        {
+            return;
+        }
+
+        slimeRigidbody.velocity = calculateLaunchVelocity();
+
+        nextAttack = Time.time + timeBetweenAttacks;
+    }
+
+    Vector3 calculateLaunchVelocity()
+    {
+        Vector3 vectorToPlayer = player.position - launchPoint.position;
+        vectorToPlayer.y = 0;
+        float horizontalDistanceToPlayer = vectorToPlayer.magnitude;
+
+        float horizontalVelocity = horizontalDistanceToPlayer / slimeFlyTime;
+        float verticalVelocity = (horizontalDistanceToPlayer * 9.8f) / (2f * horizontalVelocity);
+
+        Vector3 velocity = Vector3.zero;
+        velocity.y = verticalVelocity;
+        velocity += vectorToPlayer.normalized * horizontalVelocity;
+
+        return velocity;
     }
 }
