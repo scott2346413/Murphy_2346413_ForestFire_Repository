@@ -13,6 +13,7 @@ public class ForestFire3D : MonoBehaviour
     public int nlight; // the number of trees to set alight at the start of the game
     public int xC, yC; // used for picking random x, y points
 
+    public int monsterChance; // the percentage chance a cell is assigned as monster
     public int rockChance; // the percentage chance a cell is assigned as rock
     public int grassChance; // the percentage chance a cell is assigned as grass
 
@@ -30,7 +31,7 @@ public class ForestFire3D : MonoBehaviour
 
     private Camera gameCamera; // the camera that is players viewport
 
-    public bool setRandomFires;
+    public bool setRandomFires; // decides whether or not script will set random fires during generation
 
     // Awake is a built-in Unity function that is only called once, before the Start function
     private void Awake()
@@ -114,7 +115,11 @@ public class ForestFire3D : MonoBehaviour
             {
                 xC = UnityEngine.Random.Range(0, 100); // generate a random number between 0 and 100
 
-                if (xC < rockChance) // if the random value is less than rock chance, assign cell as rock
+                if(xC < monsterChance)
+                {
+                    forestFireCells[xCount, yCount].SetMonster();
+                }
+                else if (xC < rockChance) // if the random value is less than rock chance, assign cell as rock
                 {                   
                     forestFireCells[xCount, yCount].SetRock();
                 }
@@ -320,7 +325,11 @@ public class ForestFire3D : MonoBehaviour
             // check current state of cell an update visual
             for (int yCount = 0; yCount < gridSizeY; yCount++)
             {
-                if (forestFireCells[xCount, yCount].cellState == ForestFireCell.State.Alight)
+                if (forestFireCells[xCount, yCount].cellState == ForestFireCell.State.Monster)
+                {
+                    forestFireCells[xCount, yCount].SetMonster();
+                }
+                else if (forestFireCells[xCount, yCount].cellState == ForestFireCell.State.Alight)
                 {
                     forestFireCells[xCount, yCount].SetAlight();
                 }
@@ -328,7 +337,7 @@ public class ForestFire3D : MonoBehaviour
                 {
                     forestFireCells[xCount, yCount].SetRock();
                 }
-                else if (forestFireCells[xCount, yCount].cellState != ForestFireCell.State.Rock && forestFireCells[xCount, yCount].cellFuel <= 0)// it's not a rock but it's fuel is zero, therefore it must be burnt out grass or tree
+                else if (forestFireCells[xCount, yCount].cellState != ForestFireCell.State.Rock && forestFireCells[xCount, yCount].cellState != ForestFireCell.State.Monster && forestFireCells[xCount, yCount].cellFuel <= 0)// it's not a rock or monster but it's fuel is zero, therefore it must be burnt out grass or tree
                 {
                     forestFireCells[xCount, yCount].SetBurnt();
                 }
@@ -340,6 +349,7 @@ public class ForestFire3D : MonoBehaviour
                 {
                     forestFireCells[xCount, yCount].SetTree();
                 }
+                
             }
         }
     }

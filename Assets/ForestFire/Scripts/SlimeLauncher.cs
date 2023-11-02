@@ -7,8 +7,8 @@ public class SlimeLauncher : MonoBehaviour
 {
     [SerializeField] Transform launchPoint;
     [SerializeField] GameObject slimeball;
-    [SerializeField] float timeBetweenAttacks;
 
+    [SerializeField] float timeBetweenAttacks;
     [SerializeField] float slimeFlyTime;
 
     float nextAttack;
