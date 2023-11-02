@@ -8,11 +8,15 @@ public class SlimeLauncher : MonoBehaviour
     [SerializeField] Transform launchPoint;
     [SerializeField] GameObject slimeball;
 
-    [SerializeField] float timeBetweenAttacks;
+    [SerializeField] float maxTimeBetweenAttacks;
+    [SerializeField] float minTimeBetweenAttacks;
     [SerializeField] float slimeFlyTime;
+
+    [SerializeField] float attackRange;
 
     float nextAttack;
     Transform player;
+    Vector3 currentTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,15 @@ public class SlimeLauncher : MonoBehaviour
 
     void throwSlime()
     {
+        if(Vector3.Distance(player.position, launchPoint.position) < attackRange)
+        {
+            currentTarget = player.position;
+        }
+        else
+        {
+            currentTarget = new Vector3(Random.Range(1, attackRange), 0, Random.Range(1, attackRange)) + launchPoint.position;
+        }
+
         GameObject thisSlimeball = Instantiate(slimeball, launchPoint.position, Quaternion.identity);
         Rigidbody slimeRigidbody = thisSlimeball.GetComponent<Rigidbody>();
 
@@ -42,21 +55,22 @@ public class SlimeLauncher : MonoBehaviour
 
         slimeRigidbody.velocity = calculateLaunchVelocity();
 
-        nextAttack = Time.time + timeBetweenAttacks;
+        nextAttack = Time.time + Random.Range(minTimeBetweenAttacks, maxTimeBetweenAttacks);
+
     }
 
     Vector3 calculateLaunchVelocity()
     {
-        Vector3 vectorToPlayer = player.position - launchPoint.position;
-        vectorToPlayer.y = 0;
-        float horizontalDistanceToPlayer = vectorToPlayer.magnitude;
+        Vector3 vectorToTarget = currentTarget - launchPoint.position;
+        vectorToTarget.y = 0;
+        float horizontalDistanceToTarget = vectorToTarget.magnitude;
 
-        float horizontalVelocity = horizontalDistanceToPlayer / slimeFlyTime;
-        float verticalVelocity = (horizontalDistanceToPlayer * 9.8f) / (2f * horizontalVelocity);
+        float horizontalVelocity = horizontalDistanceToTarget / slimeFlyTime;
+        float verticalVelocity = (horizontalDistanceToTarget * 9.8f) / (2f * horizontalVelocity);
 
         Vector3 velocity = Vector3.zero;
         velocity.y = verticalVelocity;
-        velocity += vectorToPlayer.normalized * horizontalVelocity;
+        velocity += vectorToTarget.normalized * horizontalVelocity;
 
         return velocity;
     }
