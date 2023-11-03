@@ -33,6 +33,9 @@ public class ForestFire3D : MonoBehaviour
 
     public bool setRandomFires; // decides whether or not script will set random fires during generation
 
+    public float totalGrassAndTrees; // total number of grass and tree tiles
+    public float totalBurnt; // total number of burnt cells
+
     // Awake is a built-in Unity function that is only called once, before the Start function
     private void Awake()
     {
@@ -43,6 +46,9 @@ public class ForestFire3D : MonoBehaviour
     // Start is a built-in Unity function that is called before the first frame update
     private void Start()
     {
+        totalGrassAndTrees = 0;
+        totalBurnt = 0;
+
         CreateGrid(gridSizeX, gridSizeY);
         RandomiseGrid();
         //PauseGame(true);
@@ -125,11 +131,13 @@ public class ForestFire3D : MonoBehaviour
                 }
                 else if (xC < grassChance) // if the random value is less than grass chance, assign cell as grass and set cell fuel
                 {
+                    totalGrassAndTrees++;
                     forestFireCells[xCount, yCount].SetGrass();
                     forestFireCells[xCount, yCount].cellFuel = UnityEngine.Random.Range(1, 5);
                 }
                 else // if the random value is higher than rock and grass chance, assign as tree and set cell fuel
                 {
+                    totalGrassAndTrees++;
                     forestFireCells[xCount, yCount].SetTree();
                     forestFireCells[xCount, yCount].cellFuel = UnityEngine.Random.Range(15, 25);
                 }
@@ -178,6 +186,7 @@ public class ForestFire3D : MonoBehaviour
                     {
                         // cell has no fuel so is burned out 
                         forestFireCellsNextGenStates[xCount, yCount] = ForestFireCell.State.Burnt;
+                        totalBurnt++;
                     }
                     else // cell still has fuel so carries on burning
                     {

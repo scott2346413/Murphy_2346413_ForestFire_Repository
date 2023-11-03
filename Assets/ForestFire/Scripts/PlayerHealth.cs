@@ -8,7 +8,10 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] HorizontalProgressBar healthBar;
     [SerializeField] float maxHealth;
+    [SerializeField] GameObject damageVolume;
     float currentHealth;
+
+    bool tookDamage = false;
 
 
     // Start is called before the first frame update
@@ -18,10 +21,24 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetProgress(1);
     }
 
+    private void Update()
+    {
+        if (tookDamage)
+        {
+            damageVolume.SetActive(true);
+            tookDamage = false;
+        }
+        else
+        {
+            damageVolume.SetActive(false);
+        }
+    }
+
     public void doDamage(float amount)
     {
         currentHealth -= amount;
         healthBar.SetProgress(currentHealth / maxHealth);
+        tookDamage = true;
 
         if(currentHealth <= 0)
         {

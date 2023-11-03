@@ -28,7 +28,6 @@ public class FadeAway : MonoBehaviour
         {
             Color color = _renderer.material.color;
             color.a = ((destroyTime-Time.time) / fadeTime) * 1f;
-            Debug.Log(color.a);
             _renderer.material.color = color;
         }
 
