@@ -48,6 +48,6 @@ public class PlayerHealth : MonoBehaviour
 
     void die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("ForestFireRespawn");
     }
 }
