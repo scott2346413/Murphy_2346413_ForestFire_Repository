@@ -422,9 +422,9 @@ MonoBehaviour:
   launchPoint: {fileID: 7357381323895855941}
   slimeball: {fileID: 646913534641793489, guid: 2aeb705097f58de41bfbcc48643f5647,
     type: 3}
-  maxTimeBetweenAttacks: 5
-  minTimeBetweenAttacks: 3
-  slimeFlyTime: 3
+  maxTimeBetweenAttacks: 4
+  minTimeBetweenAttacks: 0.5
+  slimeFlyTime: 2
   attackRange: 30
 --- !u!4 &4216970388893853314 stripped
 Transform:

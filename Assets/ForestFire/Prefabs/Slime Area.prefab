@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3fd87da0f1fb24f95b2766e760a849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerSecond: 4
+  damagePerSecond: 6
   damageSound: {fileID: 3369852161758969592}
 --- !u!114 &-4293529170365394492
 MonoBehaviour:
@@ -1166,8 +1166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9142e65c42f3a14d82a101fa0bc90aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDelay: 2
-  fadeTime: 8
+  fadeDelay: 3
+  fadeTime: 12
 --- !u!1 &3369852161758969592
 GameObject:
   m_ObjectHideFlags: 0
