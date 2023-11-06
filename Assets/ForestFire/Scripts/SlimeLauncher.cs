@@ -66,7 +66,8 @@ public class SlimeLauncher : MonoBehaviour
         float horizontalDistanceToTarget = vectorToTarget.magnitude;
 
         float horizontalVelocity = horizontalDistanceToTarget / slimeFlyTime;
-        float verticalVelocity = (horizontalDistanceToTarget * 9.8f) / (2f * horizontalVelocity);
+        float verticalVelocity = -launchPoint.position.y / slimeFlyTime + 9.8f * slimeFlyTime / 2;
+        //float verticalVelocity = (horizontalDistanceToTarget * 9.8f) / (2f * horizontalVelocity);
 
         Vector3 velocity = Vector3.zero;
         velocity.y = verticalVelocity;
