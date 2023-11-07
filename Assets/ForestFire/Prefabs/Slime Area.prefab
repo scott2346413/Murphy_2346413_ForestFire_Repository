@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3fd87da0f1fb24f95b2766e760a849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerSecond: 0
+  damagePerSecond: 6
   damageSound: {fileID: 3369852161758969592}
 --- !u!114 &-4293529170365394492
 MonoBehaviour:

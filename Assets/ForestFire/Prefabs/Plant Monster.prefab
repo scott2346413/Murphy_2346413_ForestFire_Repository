@@ -419,6 +419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416aa03de81d6f74fa3873beb3e7a15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minStartDelay: 6
+  maxStartDelay: 13
   launchPoint: {fileID: 7357381323895855941}
   slimeball: {fileID: 646913534641793489, guid: 2aeb705097f58de41bfbcc48643f5647,
     type: 3}

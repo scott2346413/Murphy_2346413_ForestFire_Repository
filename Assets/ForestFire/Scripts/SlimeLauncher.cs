@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class SlimeLauncher : MonoBehaviour
 {
+    [SerializeField] float minStartDelay;
+    [SerializeField] float maxStartDelay;
+
     [SerializeField] Transform launchPoint;
     [SerializeField] GameObject slimeball;
 
@@ -22,7 +25,7 @@ public class SlimeLauncher : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<XROrigin>().transform;
-        nextAttack = Time.time;
+        nextAttack = Time.time + Random.Range(minStartDelay, maxStartDelay);
     }
 
     // Update is called once per frame
