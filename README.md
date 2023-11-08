@@ -32,7 +32,7 @@ Before playing *Forest Invaders*, you'll need:
 
 ### Installation
 
-1. Download the Unity build of *Forest Invaders* from [insert_download_link_here].
+1. Download the Unity build of *Forest Invaders* from [the releases section](https://github.com/scott2346413/Murphy_2346413_ForestFire_Repository/releases/tag/forestfire).
 
 2. Extract the downloaded files to a location of your choice.
 
