@@ -151,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 4134505312059479865, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 80
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 4134505312059479865, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
@@ -161,7 +161,7 @@ PrefabInstance:
     - target: {fileID: 4134505312059479865, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 80
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 4134505312059479865, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
@@ -310,8 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc528fe6513d1ef4da8c03021dea4873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSizeX: 40
-  gridSizeY: 40
+  gridSizeX: 60
+  gridSizeY: 60
   nlight: 5
   xC: 0
   yC: 0
@@ -322,7 +322,7 @@ MonoBehaviour:
     type: 3}
   gameRunning: 1
   updateRate: 2.7
-  setRandomFires: 0
+  setRandomFires: 1
   totalGrassAndTrees: 0
   totalBurnt: 0
 --- !u!224 &229191067 stripped

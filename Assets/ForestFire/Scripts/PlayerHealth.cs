@@ -6,48 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] HorizontalProgressBar healthBar;
-    [SerializeField] float maxHealth;
-    [SerializeField] GameObject damageVolume;
-    float currentHealth;
-
-    bool tookDamage = false;
+    [SerializeField] HorizontalProgressBar healthBar; // The health progress bar
+    [SerializeField] float maxHealth; // Player's maximum health
+    float currentHealth; // Player's current health
 
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
-        healthBar.SetProgress(1);
+        currentHealth = maxHealth; // set the current health to maximum
+        healthBar.SetProgress(1); // progress bar set to full
     }
 
-    private void Update()
-    {
-        if (tookDamage)
-        {
-            damageVolume.SetActive(true);
-            tookDamage = false;
-        }
-        else
-        {
-            damageVolume.SetActive(false);
-        }
-    }
-
+    //Do Damage deals damage to the player and does any relevant processing
     public void doDamage(float amount)
     {
-        currentHealth -= amount;
-        healthBar.SetProgress(currentHealth / maxHealth);
-        tookDamage = true;
+        currentHealth -= amount; // reduce current health by a set amount
+        healthBar.SetProgress(currentHealth / maxHealth); // update the health progress bar
 
-        if(currentHealth <= 0)
+        if(currentHealth <= 0) // if current health reaches 0, player dies
         {
             die();
         }
     }
 
+    // Die loads the respawn scene
     void die()
     {
-        SceneManager.LoadScene("ForestFireRespawn");
+        SceneManager.LoadScene("ForestFireRespawn"); // load the respawn scene where player can then choose to respawn into forest fire
     }
 }

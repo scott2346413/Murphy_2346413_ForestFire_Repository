@@ -8,82 +8,74 @@ using UnityEngine.UI;
 public class FireStarter : MonoBehaviour
 {
     //cooldown variables
-    [SerializeField] float cooldownTime;
-    float nextCooldown;
-    [SerializeField] Slider cooldownSlider;
+    [SerializeField] float cooldownTime; // how long the lighter takes to cooldown
+    float nextCooldown; // when will the lighter be cooled down
+    [SerializeField] Slider cooldownSlider; // slider which shows the cooldown time
 
     //XR and interaction variables
-    [SerializeField] XRRayInteractor interactor;
-    [SerializeField] InputActionReference startFire;
+    [SerializeField] XRRayInteractor interactor; // the ray interactor to get current cell
+    [SerializeField] InputActionReference startFire; // input used to start fire
 
     //SFX variables
-    [SerializeField] AudioSource lighterSound;
+    [SerializeField] AudioSource lighterSound; // sound played when lighter activates
 
 
     private void Start()
     {
-        //set cooldown values
-        nextCooldown = Time.time;
-        cooldownSlider.maxValue = cooldownTime;
+        nextCooldown = Time.time; // set next cooldown as now so lighter is ready to use
+        cooldownSlider.maxValue = cooldownTime; // set cooldown sliders max value to be the cooldown time
     }
 
     private void Update()
     {
-        //start a fire if the action button is pressed
-        if (startFire.action.IsPressed())
+        if (startFire.action.IsPressed()) // if the input action is pressed, start a fire
         {
-            Debug.Log("start fire");
-            StartFire();
+            StartFire(); // call start fire method
         }
 
-        updateCooldownSlider();
+        updateCooldownSlider(); // updates the cooldown slider value
     }
 
     //starts a fire at the selected cell
     void StartFire()
     {
-        //return if cooldown not done yet
-        if(!(Time.time>nextCooldown))
+        if(!(Time.time>nextCooldown)) // return if cooldown not done yet
         {
             return;
         }
 
-        ForestFireCell cell = getCurrentCell();
+        ForestFireCell cell = getCurrentCell(); // get the current cell being selected
 
-        //return if the cell has already been set alight or burnt
-        if(cell.cellState == ForestFireCell.State.Alight || cell.cellState == ForestFireCell.State.Burnt)
+        if(cell.cellState == ForestFireCell.State.Alight || cell.cellState == ForestFireCell.State.Burnt) // return if the cell has already been set alight or burnt
         {
             return;
         }
 
-        //set cell alight, play sound and reset timer
-        cell.SetAlight();
-        lighterSound.Play();
-        nextCooldown = Time.time + cooldownTime;
+        cell.SetAlight(); // set cell alight
+        lighterSound.Play(); // player lighter sound
+        nextCooldown = Time.time + cooldownTime; // set next cooldown to happen after cooldown time
     }
 
-    //gets the cell being selected by XR Ray Interaction
+    //Get Current Cell gets the cell being selected by XR Ray Interaction
     ForestFireCell getCurrentCell()
     {
-        //get raycast hit from interactor
         RaycastHit hit;
-        interactor.TryGetCurrent3DRaycastHit(out hit);
+        interactor.TryGetCurrent3DRaycastHit(out hit); // Get the current raycast hit from interactor
 
-        //if not null, get cell component
-        if(hit.collider != null)
+        if(hit.collider != null) // if hit isn't null, get the cell component
         {
-            return hit.collider.GetComponent<ForestFireCell>();
+            return hit.collider.GetComponent<ForestFireCell>(); // return cell component
         }
 
-        return null;
+        return null; // returns null when hit is null
     }
 
-    //manages the cooldown slider, setting its values
+    //Update Cooldown Slider manages the cooldown slider, setting its values
     void updateCooldownSlider()
     {
-        cooldownSlider.gameObject.SetActive(Time.time < nextCooldown);
+        cooldownSlider.gameObject.SetActive(Time.time < nextCooldown); // only show when we are cooling down
 
-        float timeToCooldown = nextCooldown - Time.time;
-        cooldownSlider.value = timeToCooldown;
+        float timeToCooldown = nextCooldown - Time.time; // get how long we need to wait for cooldown
+        cooldownSlider.value = timeToCooldown; // set values for cooldown slider
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DamagePlayer : MonoBehaviour
 {
-    //[SerializeField] float damage;
-    //[SerializeField] float damageDelay;
     [SerializeField] float damagePerSecond;
 
     [SerializeField] GameObject damageSound;
@@ -47,12 +45,6 @@ public class DamagePlayer : MonoBehaviour
 
         health.doDamage(damagePerSecond * Time.deltaTime);
         damageSound.SetActive(true);
-
-        /*if(Time.time > nextDamage)
-        {
-            health.doDamage(damage);
-            nextDamage += damageDelay;
-        }*/
     }
 
 }
