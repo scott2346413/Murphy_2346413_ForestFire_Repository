@@ -73,6 +73,6 @@ In *Forest Invaders*, your objective is to stop the alien invasion by strategica
 - Immersive start and end scenes
 
 ## Video
-[![Watch the video](https://img.youtube.com/vi/MNHew7ULaBM/maxresdefault.jpg)](https://youtu.be/MNHew7ULaBM)
+[![Watch the video](https://img.youtube.com/vi/seyhmcz2BMs/maxresdefault.jpg)](https://youtu.be/seyhmcz2BMs)
 
 Thank you for playing *Forest Invaders*! Enjoy the game and have fun defending the forest against the alien invaders!
